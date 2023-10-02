@@ -49,11 +49,6 @@ void Sculptor::putVoxel(int x, int y, int z) {
     v[x][y][z].show = true;
 }
 
-// começar entrontros presenciais
-// continuar a fazer a descompressão
-// continuar a fazer melhorias da doc e do código (sobre o que dani falou)
-// parar de mentir sobre as confras no meio do ano
-
 
 void Sculptor::writeOFF(const char *filename){
     int total_voxels = 0;
