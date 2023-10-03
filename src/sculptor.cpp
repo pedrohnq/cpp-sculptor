@@ -64,7 +64,6 @@ void Sculptor::writeOFF(const char *filename){
     fout << "OFF" << std::endl;
 
 
-
     for (int i=0; i<nx; i++) {
         for (int j=0; j<ny; j++) {
             for (int k=0; k<nz; k++) {
@@ -100,12 +99,18 @@ void Sculptor::writeOFF(const char *filename){
         for (int j=0; j<ny; j++) {
             for (int k=0; k<nz; k++) {
                 if (v[i][j][k].show) {
-                    fout << "4 " << count << " " << count+3 << " " << count+2 << " " << count+1 << " " << r << " " << g << " " << b << " " << a << std::endl;
-                    fout << "4 " << count+4 << " " << count+5 << " " << count+6 << " " << count+7 << " " << r << " " << g << " " << b << " " << a << std::endl;
-                    fout << "4 " << count << " " << count+1 << " " << count+5 << " " << count+4 << " " << r << " " << g << " " << b << " " << a << std::endl;
-                    fout << "4 " << count << " " << count+4 << " " << count+7 << " " << count+3 << " " << r << " " << g << " " << b << " " << a << std::endl;
-                    fout << "4 " << count+3 << " " << count+7 << " " << count+6 << " " << count+2 << " " << r << " " << g << " " << b << " " << a << std::endl;
-                    fout << "4 " << count+1 << " " << count+2 << " " << count+6 << " " << count+5 << " " << r << " " << g << " " << b << " " << a << std::endl;
+                    fout << "4 " << count << " " << count+3 << " " << count+2 << " " << count+1 << " ";
+                    fout << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std::endl;
+                    fout << "4 " << count+4 << " " << count+5 << " " << count+6 << " " << count+7 << " ";
+                    fout << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std::endl;
+                    fout << "4 " << count << " " << count+1 << " " << count+5 << " " << count+4 << " ";
+                    fout << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std::endl;
+                    fout << "4 " << count << " " << count+4 << " " << count+7 << " " << count+3 << " ";
+                    fout << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std::endl;
+                    fout << "4 " << count+3 << " " << count+7 << " " << count+6 << " " << count+2 << " ";
+                    fout << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std::endl;
+                    fout << "4 " << count+1 << " " << count+2 << " " << count+6 << " " << count+5 << " ";
+                    fout << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << std::endl;
                     count += 8;
                 }
             }
