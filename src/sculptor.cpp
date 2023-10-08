@@ -4,6 +4,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <iomanip>
+#include <cmath>
 
 
 
@@ -47,6 +48,97 @@ void Sculptor::putVoxel(int x, int y, int z) {
     v[x][y][z].b = b;
     v[x][y][z].a = a;
     v[x][y][z].show = true;
+}
+
+
+void Sculptor::cutVoxel(int x, int y, int z) {
+    v[x][y][z].show = false;
+}
+
+
+void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1) {
+    for (int i=x0; i<=x1; i++) {
+        for (int j=y0; j<=y1; j++) {
+            for (int k=z0; k<=z1; k++) {
+                putVoxel(i, j, k);
+            }
+        }
+    }
+}
+
+
+void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1) {
+    for (int i=x0; i<=x1; i++) {
+        for (int j=y0; j<=y1; j++) {
+            for (int k=z0; k<=z1; k++) {
+                cutVoxel(i, j, k);
+            }
+        }
+    }
+}
+
+
+void Sculptor::putSphere(int xcenter, int ycenter, int zcenter, int radius) {
+    double dist;
+
+    for (int i=0; i<nx; i++) {
+        for (int j=0; j<ny; j++) {
+            for (int k=0; k<nz; k++) {
+                dist = pow(i-xcenter, 2) + pow(j-ycenter, 2) + pow(k-zcenter, 2);
+                if (dist <= pow(radius, 2)) {
+                    putVoxel(i, j, k);
+                }
+            }
+        }
+    }
+}
+
+
+void Sculptor::cutSphere(int xcenter, int ycenter, int zcenter, int radius) {
+    double dist;
+
+    for (int i=0; i<nx; i++) {
+        for (int j=0; j<ny; j++) {
+            for (int k=0; k<nz; k++) {
+                dist = pow(i-xcenter, 2) + pow(j-ycenter, 2) + pow(k-zcenter, 2);
+                if (dist <= pow(radius, 2)) {
+                    cutVoxel(i, j, k);
+                }
+            }
+        }
+    }
+}
+
+
+void Sculptor::putEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz) {
+    double dist;
+
+    for (int i=0; i<nx; i++) {
+        for (int j=0; j<ny; j++) {
+            for (int k=0; k<nz; k++) {
+                dist = pow(i-xcenter, 2)/pow(rx, 2) + pow(j-ycenter, 2)/pow(ry, 2) + pow(k-zcenter, 2)/pow(rz, 2);
+                if (dist <= 1) {
+                    putVoxel(i, j, k);
+                }
+            }
+        }
+    }
+}
+
+
+void Sculptor::cutEllipsoid(int xcenter, int ycenter, int zcenter, int rx, int ry, int rz) {
+    double dist;
+
+    for (int i=0; i<nx; i++) {
+        for (int j=0; j<ny; j++) {
+            for (int k=0; k<nz; k++) {
+                dist = pow(i-xcenter, 2)/pow(rx, 2) + pow(j-ycenter, 2)/pow(ry, 2) + pow(k-zcenter, 2)/pow(rz, 2);
+                if (dist <= 1) {
+                    cutVoxel(i, j, k);
+                }
+            }
+        }
+    }
 }
 
 
